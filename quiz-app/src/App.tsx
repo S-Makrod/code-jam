@@ -1,4 +1,3 @@
-import './App.css'
 import { ThemeProvider } from '@emotion/react'
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
