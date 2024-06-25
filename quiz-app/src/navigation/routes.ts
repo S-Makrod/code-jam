@@ -1,6 +1,7 @@
 const routes: { [key: string]: string } = {
-    main: '',
-    quiz: '/quiz'
+    main: '/',
+    quiz: '/quiz',
+    summary: '/summary'
 }
 
 export default routes

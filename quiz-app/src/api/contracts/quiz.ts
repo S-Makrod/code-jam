@@ -1,6 +1,4 @@
-export type Score = {
-    score: number
-}
+export type Score = number
 
 export type Topics = Array<string>
 
