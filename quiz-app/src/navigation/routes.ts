@@ -1,5 +1,5 @@
 const routes: { [key: string]: string } = {
-    main: '',
+    main: '/',
     quiz: '/quiz',
     summary: '/summary'
 }
