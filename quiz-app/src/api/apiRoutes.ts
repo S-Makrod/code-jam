@@ -1,6 +1,7 @@
 const apiRoutes: { [key: string]: string } = {
     questions: 'questions',
     score: 'score',
+    topics: 'topics',
     answer: 'answer',
     verify: 'verify',
     reset: 'reset',

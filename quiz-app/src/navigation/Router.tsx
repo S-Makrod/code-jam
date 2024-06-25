@@ -5,6 +5,12 @@ import LandingPage from '../api/pages/LandingPage'
 import Quiz from '../api/pages/Quiz'
 
 const Router = () => {
+<<<<<<< Updated upstream
+=======
+    const [questions, setQuestions] = useState<Array<Question>>([])
+    const [numberofPlayers, setNumberofPlayers] = useState(1)
+
+>>>>>>> Stashed changes
     return (
         <ScrollToTop>
             <Routes>

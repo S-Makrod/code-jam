@@ -4,12 +4,16 @@ import Service from '../service'
 import Question from '../../types/question'
 import { METHODS } from '../utils'
 import { Empty } from '../contracts/generalContracts'
-import { Answer, Guess, Score } from '../contracts/quiz'
+import { Answer, Guess, Score, Topics } from '../contracts/quiz'
 
 const quizService = new Service<Question>()
 
 const retrieveScore = async (playerId: string): Promise<ServiceResponse<Score>> => {
     return await quizService.requestWith<Score, Empty>(METHODS.get, undefined, `${apiRoutes.score}/${playerId}`)
+}
+
+const retrieveTopics = async (): Promise<ServiceResponse<Topics>> => {
+    return await quizService.requestWith<Topics, Empty>(METHODS.get, undefined, `${apiRoutes.topics}`)
 }
 
 const verify = async (questionId: string, guess: Guess): Promise<ServiceResponse<Answer>> => {
@@ -22,6 +26,7 @@ const reset = async (): Promise<ServiceResponse<Empty>> => {
 
 export default {
     retrieveScore,
+    retrieveTopics,
     verify,
     reset
 }
