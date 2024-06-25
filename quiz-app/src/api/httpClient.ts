@@ -8,7 +8,7 @@ class HttpClient<T> implements IHttpClient<T> {
     stateManager: ITokenStateManager
 
     constructor(root?: string, base?: string) {
-        let baseURL = 'api/'
+        let baseURL = import.meta.env.VITE_BACKEND_BASE
         
         if (base)
             baseURL += `${base}/`

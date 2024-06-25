@@ -1,12 +1,15 @@
-import './App.css'
+import Footer from './components/Footer'
+import NavBar from './components/NavBar'
 import Router from './navigation/Router'
 
 function App() {
-  return (
-    <>
-      <Router />
-    </>
-  )
+    return (
+        <>
+            <NavBar />
+            <Router />
+            <Footer />
+        </>
+    )
 }
 
 export default App
