@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './Quiz.css'
 import quizService from "../api/services/quizService"
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   questions: Array<Question>,
@@ -36,7 +37,12 @@ const Quiz = ({questions, numberOfPlayers}: Props) => {
 
   const [score, setScore] = useState(0)
 
+  const navigate = useNavigate()
+
   const onClickAnswer = async (id) => {
+    if (questionCount === currentQuestionId - 1) {
+      navigate('/summary')
+    }
     try {
       setCurrentQuestionId(currentQuestionId + 1)
       setQuestionCount(questionCount + 1)
