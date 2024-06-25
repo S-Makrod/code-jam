@@ -2,6 +2,8 @@ import { Button, ButtonGroup, Container, Grid, MenuItem, TextField, Typography }
 import { useState } from "react"
 import questionService from "../api/services/questionService"
 import Question from "../types/question"
+import { useNavigate } from "react-router-dom"
+import routes from "../navigation/routes"
 
 export const topics = [
   { label: 'Math', value: 'Math' },
@@ -10,12 +12,18 @@ export const topics = [
   { label: 'History', value: 'History' },
 ]
 
-const LandingPage = () => {
+interface Props {
+  questions: Array<Question>,
+  setQuestions: (arg: Array<Question>) => void,
+  numberOfPlayers: number,
+  setNumberOfPlayers: (arg: number) => void
+}
+
+const LandingPage = ({questions, setQuestions, numberOfPlayers, setNumberOfPlayers}: Props) => {
   const [topic, setTopic] = useState('All')
   const [difficulty, setDifficulty] = useState(1)
-  const [numberOfPlayers, setNumberOfPlayers] = useState(1)
 
-  const [questions, setQuestions] = useState<Array<Question>>([])
+  const navigate = useNavigate()
 
   const getQuestions = async () => {
     let query = ``
@@ -33,6 +41,8 @@ const LandingPage = () => {
       setQuestions(res.data as Question[])
 
     console.log(questions)
+
+    navigate(routes.quiz)
   }
 
   return (
