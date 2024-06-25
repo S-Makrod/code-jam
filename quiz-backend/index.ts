@@ -3,11 +3,12 @@ import cors from 'cors'
 
 const app : Express = express()
 const port = 3000;
-const data : Question[] = require('./questions.json')
+const data : Question[] = require('./questions.json').map((e : any, idx : number) => ({...e, id: idx}))
 app.use(express.json())
 app.use(cors())
 
 interface Question {
+    id : number,
     question : string, 
     topic : string 
     options : Array<string>,
@@ -43,7 +44,11 @@ function getQuestions(data : Question[], difficulty? : string, topic? : string) 
 
 app.get("/questions/:id", (req : Request, res : Response) => {
     let id : number = parseInt(req.params.id)
+    if (id > data.length || id < 0) {
+        throw new Error("Invalid question id")
+    }
     res.status(200).send({
+        "id": data[id].id,
         "question": data[id].question,
         "topic": data[id].topic,
         "options": data[id].options,
@@ -68,7 +73,6 @@ app.get("/topics", (req : Request, res : Response) => {
 app.get("/score/:playerName", (req : Request, res : Response) => {
     console.log(req.params.playerName)
     if (players.map((e) => e.username).includes(req.params.playerName)) {
-        console.log(players.filter((e) => e.username == req.params.playerName)[0].score)
         res.status(200).send(`${players.filter((e) => e.username == req.params.playerName)[0].score}`)
     } else {
         res.status(400).send("User does not exist!")
@@ -103,7 +107,6 @@ app.post("/register", (req : Request, res : Response) => {
 })
 
 app.post("/unregister/:playerName", (req : Request, res : Response) => {
-    console.log(players)
     if (players.some((e) => {
         return e.username == req.params.playerName
     })) {
@@ -120,10 +123,6 @@ app.post("/reset", (req : Request, res : Response) => {
     })
     res.send("Reset scores!")
 })
-
-function filterQuestions(diff : String, topic : String) {
-    return data.filter((e : any) => e.difficulty == diff && e.topic == topic)
-}
 
 app.listen(port, () => {
     console.log("Server is running on PORT: ", port);
