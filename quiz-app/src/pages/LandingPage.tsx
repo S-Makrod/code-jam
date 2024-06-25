@@ -102,6 +102,7 @@ const LandingPage = ({questions, setQuestions, numberOfPlayers, setNumberOfPlaye
               label='Number of Players'
               type="number"
               value={numberOfPlayers}
+              disabled
               onChange={(e) => (e.target.value as unknown as number) >= 1 && setNumberOfPlayers(e.target.value as unknown as number)}
             />
           </Grid>
