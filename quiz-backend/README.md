@@ -24,6 +24,14 @@
     Checks the question answer (pass in question id)
     
     Pass in player name?
+
+    Format: 
+    {
+        user : string,
+        questionId : number,
+        answerResponse : string
+    }
+
 - POST /reset
     
     Reset the scores for all players to 0
