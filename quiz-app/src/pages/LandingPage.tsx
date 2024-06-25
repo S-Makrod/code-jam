@@ -1,9 +1,11 @@
 import { Button, ButtonGroup, Container, Grid, MenuItem, TextField, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import questionService from "../api/services/questionService"
 import Question from "../types/question"
 import { useNavigate } from "react-router-dom"
 import routes from "../navigation/routes"
+import quizService from "../api/services/quizService"
+import { Topics } from "../api/contracts/quiz"
 
 export const topics = [
   { label: 'Math', value: 'Math' },
@@ -21,9 +23,22 @@ interface Props {
 
 const LandingPage = ({questions, setQuestions, numberOfPlayers, setNumberOfPlayers}: Props) => {
   const [topic, setTopic] = useState('All')
+  const [topics, setTopics] = useState<Array<{label: string, value: string}>>([])
   const [difficulty, setDifficulty] = useState(1)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    loadTopics()
+  }, [])
+
+  const loadTopics = async () => {
+    const res = await quizService.retrieveTopics()
+    if(res.success) {
+      let t = res.data as Topics
+      setTopics(t.map(val => {return {label: val, value: val}}))
+    }
+  }
 
   const getQuestions = async () => {
     let query = ``

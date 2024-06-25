@@ -8,13 +8,13 @@ import Question from '../types/question'
 
 const Router = () => {
     const [questions, setQuestions] = useState<Array<Question>>([])
-    const [numberofPlayers, setNumberofPlayers] = useState(0)
+    const [numberofPlayers, setNumberofPlayers] = useState(1)
 
     return (
         <ScrollToTop>
             <Routes>
-                <Route path={routes.main} element={<LandingPage questions={questions} setQuestions={setQuestions} numberOfPlayers={numberofPlayers} setNumberOfPlayers={setNumberofPlayers}/>} />
-                <Route path={routes.quiz} element={<Quiz questions={questions} numberOfPlayers={numberofPlayers} />} />
+                <Route path={routes.main} element={<LandingPage questions={questions} numberOfPlayers={numberofPlayers} setNumberOfPlayers={setNumberofPlayers} setQuestions={setQuestions} />} />
+                <Route path={routes.quiz} element={<Quiz questions={questions} numberOfPlayers={numberofPlayers}/>} />
             </Routes>
         </ScrollToTop>
     )
