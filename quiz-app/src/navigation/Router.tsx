@@ -16,7 +16,7 @@ const Router = () => {
             <Routes>
                 <Route path={routes.main} element={<LandingPage questions={questions} setQuestions={setQuestions} numberOfPlayers={numberofPlayers} setNumberOfPlayers={setNumberofPlayers}/>} />
                 <Route path={routes.quiz} element={<Quiz questions={questions} numberOfPlayers={numberofPlayers} />} />
-                <Route path={routes.summary} element={<Summary numberOfPlayers={numberofPlayers}/>} />
+                <Route path={routes.summary} element={<Summary/>} />
             </Routes>
         </ScrollToTop>
     )
