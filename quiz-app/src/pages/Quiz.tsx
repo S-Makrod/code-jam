@@ -26,7 +26,7 @@ const boxStyle = {
   textAlign: 'center'
 };
 
-const Quiz = ({questions, numberOfPlayers}: Props) => {
+const Quiz = ({questions, numberOfPlayers, score, setScore}: Props) => {
   const [currentQuestionId, setCurrentQuestionId] = useState(0)
 
   const [questionCount, setQuestionCount] = useState(1)
@@ -35,12 +35,11 @@ const Quiz = ({questions, numberOfPlayers}: Props) => {
 
   const [modalString, setModalString] = useState("")
 
-  const [score, setScore] = useState(0)
-
   const navigate = useNavigate()
 
   const onClickAnswer = async (id) => {
-    if (questionCount === currentQuestionId - 1) {
+    console.log(questionCount, currentQuestionId - 1)
+    if (questions.length === currentQuestionId + 1) {
       navigate('/summary')
     }
     try {
