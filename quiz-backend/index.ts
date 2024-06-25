@@ -9,12 +9,13 @@ interface Question {
     question : string, 
     topic : string 
     options : Array<string>,
-    correctAnswer : string,
+    correctAnswer? : string,
     difficulty : number
 }
 
 interface Player {
     username : string,
+    password : string,
     score : number
 }
 
@@ -34,12 +35,18 @@ function getQuestions(data : Question[], difficulty? : string, topic? : string) 
     if (topic != undefined) {
         questions = questions.filter((e) => e.topic == topic)
     }
-    return questions.map((e) => e.question)
+    questions.forEach((e) => delete e.correctAnswer)
+    return questions
 }
 
 app.get("/questions/:id", (req : Request, res : Response) => {
     let id : number = parseInt(req.params.id)
-    res.status(200).send(data[id].question)
+    res.status(200).send({
+        "question": data[id].question,
+        "topic": data[id].topic,
+        "options": data[id].options,
+        "difficulty": data[id].difficulty
+    })
 })
 
 app.get("/questions", (req : Request, res : Response) => {
@@ -61,10 +68,16 @@ app.get("/answer/:id", (req : Request, res : Response) => {
 
 app.post("/verify", (req : Request, res : Response) => {
     let body : AnswerResponse = req.body
-    if (body.answerResponse = data[body.questionId].correctAnswer) {
+    if (body.answerResponse == data[body.questionId].correctAnswer) {
         players.filter((e) => e.username == body.user)[0].score += 1
         res.send("Correct")
+    } else {
+        res.send("Incorrect")
     }
+})
+
+app.post("/register", (req : Request, res : Response) => {
+    
 })
 
 function filterQuestions(diff : String, topic : String) {
