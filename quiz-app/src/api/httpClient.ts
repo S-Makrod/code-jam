@@ -7,13 +7,13 @@ class HttpClient<T> implements IHttpClient<T> {
     client: AxiosInstance
     stateManager: ITokenStateManager
 
-    constructor(root: string, base?: string) {
-        let baseURL = ''
-
+    constructor(root?: string, base?: string) {
+        let baseURL = 'api/'
+        
         if (base)
-            baseURL = `${base}/${root}`
-        else
-            baseURL = `api/${root}`
+            baseURL += `${base}/`
+        if (root)
+            baseURL += `${root}/`
 
         this.client = axios.create({
             baseURL: baseURL,

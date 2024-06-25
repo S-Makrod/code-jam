@@ -5,12 +5,12 @@ import IHttpClient from './types/httpClient'
 import HttpClient from './httpClient'
 
 class Service<T> implements IService<T> {
-    baseUrl: string
+    baseUrl?: string
     client: IHttpClient<T>
 
-    constructor(endpoint: string, base?: string) {
+    constructor(endpoint?: string, base?: string) {
         this.baseUrl = endpoint
-        this.client = base? new HttpClient<T>(endpoint, base) : new HttpClient<T>(endpoint)
+        this.client = new HttpClient<T>(endpoint, base)
     }
 
     buildRes<V>(res: AxiosResponse<V>, error: boolean): ServiceResponse<V> {
