@@ -25,10 +25,14 @@ const LandingPage = () => {
     if(topic != 'All')
       query += `topic=${topic}`
 
+    console.log('fetching questions')
     const res = await questionService.retrieve(query)
+    console.log(`got ` + res.data)
 
     if (res.success)
       setQuestions(res.data as Question[])
+
+    console.log(questions)
   }
 
   return (
@@ -73,7 +77,7 @@ const LandingPage = () => {
             />
           </Grid>
           <Grid item sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-            <Button variant="contained">
+            <Button variant="contained" onClick={getQuestions}>
               Start Quiz
             </Button>
           </Grid>
