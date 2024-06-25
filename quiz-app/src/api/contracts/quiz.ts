@@ -11,3 +11,7 @@ export type Answer = {
 export type Guess = {
     answer: string
 }
+
+export type PlayerId = {
+    playerId: string
+}

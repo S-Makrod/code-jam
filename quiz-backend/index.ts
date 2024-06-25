@@ -38,8 +38,7 @@ function getQuestions(data : Question[], difficulty? : string, topic? : string) 
     if (topic != undefined) {
         questions = questions.filter((e) => e.topic == topic)
     }
-    questions.forEach((e) => delete e.correctAnswer)
-    return questions
+    return questions.map((e) => {return {...e, correctAnswer: undefined}})
 }
 
 app.get("/questions/:id", (req : Request, res : Response) => {
@@ -71,7 +70,6 @@ app.get("/topics", (req : Request, res : Response) => {
 })
 
 app.get("/score/:playerName", (req : Request, res : Response) => {
-    console.log(req.params.playerName)
     if (players.map((e) => e.username).includes(req.params.playerName)) {
         res.status(200).send(`${players.filter((e) => e.username == req.params.playerName)[0].score}`)
     } else {

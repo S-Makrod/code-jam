@@ -52,6 +52,10 @@ const LandingPage = ({questions, setQuestions, numberOfPlayers, setNumberOfPlaye
     const res = await questionService.retrieve(query)
     console.log(`got ` + res.data)
 
+    for(let i = 0; i < numberOfPlayers; i++) {
+      await quizService.registerPlayer(`Player`)
+    }
+
     if (res.success)
       setQuestions(res.data as Question[])
 
